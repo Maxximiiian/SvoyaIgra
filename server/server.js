@@ -115,10 +115,10 @@ app.get('/questions', async (req, res) => {
   try {
     const allQuestion = await Question.findAll();
     const category = await Category.findAll();
-    console.log('category ====>', category);
-    console.log('question ====>', allQuestion);
-    console.log(JSON.parse(JSON.stringify({ allQuestion, category })));
-    res.json(allQuestion, category);
+    // console.log('category ====>', category);
+    // console.log('question ====>', allQuestion);
+    res.json(JSON.parse(JSON.stringify({ allQuestion, category })));
+    // res.json(allQuestion, category);
   } catch (error) {
     res.json(error);
   }
