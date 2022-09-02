@@ -8,4 +8,8 @@ export const LOGOUT = 'LOGOUT';
 export const SET_LOAD = 'SET_LOAD';
 export const UNSET_LOAD = 'UNSET_LOAD';
 
-// ?
+// QUEST
+export const GET_QUEST = 'GET_QUEST';
+
+// CATEGOR
+export const GET_CATEGOR = 'GET_CATEGOR';
