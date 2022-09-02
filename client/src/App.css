@@ -109,6 +109,7 @@ h2 {
 
 .col {
     color: aqua;
+    outline: 5px black;
 }
 
 .registr {
