@@ -19,7 +19,6 @@ function App() {
       credentials: 'include'
     })
       .then((res) => res.json())
-      .then((res) => console.log(res))
       .then((data) => {
         if (data) {
           dispatch(setAuth(data));
