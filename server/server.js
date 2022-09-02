@@ -113,8 +113,12 @@ app.get('/logout', async (req, res) => {
 
 app.get('/questions', async (req, res) => {
   try {
-    const allQuestion = await Question.findAll();
+    const newQ = await Question.findAll();
     const category = await Category.findAll();
+    const newQQ = JSON.parse(JSON.stringify(newQ));
+    console.log(newQQ);
+    const allQuestion = newQQ.map((x) => ({ ...x, status: null }));
+    // console.log(newQ);
     // console.log('category ====>', category);
     // console.log('question ====>', allQuestion);
     res.json(JSON.parse(JSON.stringify({ allQuestion, category })));
