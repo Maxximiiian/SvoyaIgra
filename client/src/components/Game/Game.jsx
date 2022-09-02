@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from './Modal';
 
 export default function Game() {
   
@@ -22,5 +23,6 @@ export default function Game() {
         </table>
       </div>
     </main>
+    <Modal />
   );
 }
