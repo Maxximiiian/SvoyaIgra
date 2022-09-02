@@ -7,7 +7,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const bcrypt = require('bcrypt');
 const {
-  User, Todo,
+  User, Question, Category,
 } = require('./db/models');
 
 const app = express();
@@ -94,48 +94,49 @@ app.get('/logout', async (req, res) => {
   }
 });
 
-app.post('/todo', async (req, res) => {
-  setTimeout(async () => {
-    try {
-      const { body } = req.body;
-      const { userId } = req.session;
-      const newTodo = await Todo.create({ body, isDone: false, userId });
-      if (newTodo) {
-        res.json(newTodo);
-      } else {
-        res.status(400);
-      }
-    } catch (error) {
-      res.json(error);
-    }
-  }, 1000);
+// app.post('/todo', async (req, res) => {
+//   setTimeout(async () => {
+//     try {
+//       const { body } = req.body;
+//       const { userId } = req.session;
+//       const newTodo = await Todo.create({ body, isDone: false, userId });
+//       if (newTodo) {
+//         res.json(newTodo);
+//       } else {
+//         res.status(400);
+//       }
+//     } catch (error) {
+//       res.json(error);
+//     }
+//   }, 1000);
+// });
+
+app.get('/questions', async (req, res) => {
+  try {
+    const allQuestion = await Question.findAll();
+    const category = await Category.findAll();
+    console.log('category ====>', category);
+    console.log('question ====>', allQuestion);
+    console.log(JSON.parse(JSON.stringify({ allQuestion, category })));
+    res.json(allQuestion, category);
+  } catch (error) {
+    res.json(error);
+  }
 });
 
-app.get('/todo', async (req, res) => {
-  setTimeout(async () => {
-    try {
-      const { userId } = req.session;
-      const allTodos = await Todo.findAll({ where: { userId } });
-      res.json(allTodos);
-    } catch (error) {
-      res.json(error);
-    }
-  }, 2000);
-});
-
-app.delete('/todo', async (req, res) => {
-  setTimeout(async () => {
-    try {
-      const { id } = req.body;
-      const deletedTodo = await Todo.destroy({ where: { id } });
-      if (deletedTodo) {
-        res.json(id);
-      } else { res.status(400); }
-    } catch (error) {
-      res.json(error);
-    }
-  }, 2000);
-});
+// app.delete('/todo', async (req, res) => {
+//   setTimeout(async () => {
+//     try {
+//       const { id } = req.body;
+//       const deletedTodo = await Todo.destroy({ where: { id } });
+//       if (deletedTodo) {
+//         res.json(id);
+//       } else { res.status(400); }
+//     } catch (error) {
+//       res.json(error);
+//     }
+//   }, 2000);
+// });
 
 // app.get('/posts', async (req, res) => {
 //   const { userid } = req.query;
