@@ -38,10 +38,13 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 app.get('/auth', async (req, res) => {
+  console.log(req.session.userId);
   setTimeout(async () => {
     try {
       const result = await User.findByPk(req.session.userId);
-      res.json(result);
+      if (result) {
+        res.json(result);
+      } else res.status(400).json({ message: 'something went wrong' });
     } catch (error) {
       res.json(error);
     }
